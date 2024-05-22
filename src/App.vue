@@ -1,12 +1,28 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <LoadingSpinner v-if="isLoading" />
+    <router-view @loading="setLoading"></router-view>
   </div>
 </template>
 
 <script>
+import LoadingSpinner from './components/LoadingSpinner.vue';
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    LoadingSpinner
+  },
+  data() {
+    return {
+      isLoading: false
+    };
+  },
+  methods: {
+    setLoading(loading) {
+      this.isLoading = loading;
+    }
+  }
 };
 </script>
 

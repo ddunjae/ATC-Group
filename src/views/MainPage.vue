@@ -1,7 +1,8 @@
 <template>
   <div>
     <AppHeader :loggedIn="true" />
-    <div class="main">
+    <LoadingSpinner v-if="isLoading" />
+    <div class="main" v-else>
       <h1>Dashboard</h1>
       <div class="dashboard">
         <!-- IP Addresses Widget -->
@@ -30,22 +31,40 @@
 <script>
 import AppHeader from '../components/AppHeader.vue';
 import DashboardBox from '../components/DashboardBox.vue';
+import LoadingSpinner from '../components/LoadingSpinner.vue';
 
 export default {
   name: 'MainPage',
   components: {
     AppHeader,
-    DashboardBox
+    DashboardBox,
+    LoadingSpinner
+  },
+  data() {
+    return {
+      isLoading: false
+    };
   },
   methods: {
     refreshIPAddresses() {
+      this.setLoading(true);
       // IP 주소 데이터를 새로고침하는 로직 추가
-      console.log('IP Addresses refreshed');
+      setTimeout(() => {
+        console.log('IP Addresses refreshed');
+        this.setLoading(false);
+      }, 2000); // 예시: 2초 후에 로딩 종료
     },
-    refreshNetworkConnections() {
-      // 네트워크 연결 데이터를 새로고침하는 로직 추가
-      console.log('Network Connections refreshed');
+    setLoading(loading) {
+      this.isLoading = loading;
+      this.$emit('loading', loading);
     }
+  },
+  mounted() {
+    this.setLoading(true);
+    // 예시: 페이지 로드 시 데이터 로드
+    setTimeout(() => {
+      this.setLoading(false);
+    }, 500); // 0.5초 로딩적용
   }
 };
 </script>
