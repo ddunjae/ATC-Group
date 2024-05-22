@@ -8,6 +8,14 @@
       <router-link to="/monitoring-dashboard" class="sidebar-item">Monitoring Dashboard</router-link>
       <router-link to="/ping-speed" class="sidebar-item">Ping Speed</router-link>
       <router-link to="/network-connections" class="sidebar-item">Network Connections</router-link>
+      <div class="dropdown">
+        <button class="dropdown-toggle" @click="toggleDropdown">More Options</button>
+        <div v-if="isDropdownOpen" class="dropdown-menu">
+          <router-link to="/page1" class="dropdown-item">Page 1</router-link>
+          <router-link to="/page2" class="dropdown-item">Page 2</router-link>
+          <router-link to="/page3" class="dropdown-item">Page 3</router-link>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -17,11 +25,19 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'AppSidebar',
+  data() {
+    return {
+      isDropdownOpen: false
+    };
+  },
   computed: {
     ...mapGetters(['isSidebarOpen'])
   },
   methods: {
-    ...mapActions(['toggleSidebar'])
+    ...mapActions(['toggleSidebar']),
+    toggleDropdown() {
+      this.isDropdownOpen = !this.isDropdownOpen;
+    }
   }
 };
 </script>
@@ -66,5 +82,36 @@ export default {
 .sidebar-item:hover {
   background-color: #575757;
   padding: 5px;
+}
+
+.dropdown {
+  margin: 10px 0;
+}
+
+.dropdown-toggle {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: left;
+  padding: 10px 0;
+  width: 100%;
+}
+
+.dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.dropdown-item {
+  color: white;
+  text-decoration: none;
+  padding: 5px 0;
+}
+
+.dropdown-item:hover {
+  background-color: #575757;
 }
 </style>

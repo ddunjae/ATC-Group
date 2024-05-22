@@ -1,27 +1,28 @@
 <template>
   <div>
     <AppHeader :loggedIn="true" />
-    <div class="page">
-      <h1>App Page 2</h1>
-      <p>Welcome to App Page 2</p>
+    <AppSidebar />
+    <div class="main-content">
+      <p>Main Page Content is hidden</p>
     </div>
   </div>
 </template>
 
 <script>
 import AppHeader from '../components/AppHeader.vue';
+import AppSidebar from '../components/AppSidebar.vue';
 
 export default {
-  name: 'AppPage2',
+  name: 'MainPage',
   components: {
-    AppHeader
+    AppHeader,
+    AppSidebar
   }
 };
 </script>
 
 <style scoped>
-.page {
-  padding: 20px;
-  margin-top: 60px; /* 헤더 아래에 내용이 오도록 여백 추가 */
+.main-content {
+  display: none;
 }
 </style>

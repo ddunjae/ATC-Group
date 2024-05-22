@@ -40,8 +40,16 @@ export default {
           password: this.password
         });
         localStorage.setItem('token', response.data.token);
-        this.login(this.id); // Vuex 스토어에 사용자 ID 저장
-        this.$router.push({ name: 'Home' });
+        localStorage.setItem('role', response.data.role);
+        this.login({ user: this.id, role: response.data.role }); // Vuex 스토어에 사용자 ID와 역할 저장
+
+        if (response.data.role === 'page1') {
+          this.$router.push({ name: 'Page1' });
+        } else if (response.data.role === 'page2') {
+          this.$router.push({ name: 'Page2' });
+        } else {
+          this.$router.push({ name: 'Home' });
+        }
       } catch (error) {
         this.error = error.response.data.message;
       }
