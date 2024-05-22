@@ -71,8 +71,8 @@ export default {
 
 h2 {
   margin-bottom: 1.5rem;
-  color: #333;
-  font-size: 24px;
+  color: #0078d4;
+  font-size: 30px;
   text-align: center;
 }
 
@@ -101,7 +101,7 @@ button {
   padding: 0.75rem;
   border: none;
   border-radius: 4px;
-  background-color: #42b983;
+  background-color: #0078d4;
   color: white;
   font-size: 16px;
   cursor: pointer;
