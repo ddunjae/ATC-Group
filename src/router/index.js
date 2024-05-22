@@ -1,18 +1,25 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import MainPage from '../views/MainPage.vue';
 import LoginPage from '../views/LoginPage.vue';
-import AppPage1 from '../views/AppPage1.vue';
-import AppPage2 from '../views/AppPage2.vue';
-import AppPage3 from '../views/AppPage3.vue';
-import SystemStatus from '../views/SystemStatus.vue';
-import Network from '../views/Network.vue';
+import MonitoringDashboard from '../views/MonitoringDashboard.vue';
+import PingSpeed from '../views/PingSpeed.vue';
+import NetworkConnections from '../views/NetworkConnections.vue';
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: MainPage,
-    meta: { requiresAuth: true }
+    component: MainPage
+  },
+  {
+    path: '/system-status',
+    name: 'SystemStatus',
+    component: MainPage
+  },
+  {
+    path: '/network',
+    name: 'Network',
+    component: MainPage
   },
   {
     path: '/login',
@@ -20,49 +27,25 @@ const routes = [
     component: LoginPage
   },
   {
-    path: '/app-page1',
-    name: 'AppPage1',
-    component: AppPage1,
-    meta: { requiresAuth: true }
+    path: '/monitoring-dashboard',
+    name: 'MonitoringDashboard',
+    component: MonitoringDashboard
   },
   {
-    path: '/app-page2',
-    name: 'AppPage2',
-    component: AppPage2,
-    meta: { requiresAuth: true }
+    path: '/ping-speed',
+    name: 'PingSpeed',
+    component: PingSpeed
   },
   {
-    path: '/app-page3',
-    name: 'AppPage3',
-    component: AppPage3,
-    meta: { requiresAuth: true }
-  },
-  {
-    path: '/system-status',
-    name: 'SystemStatus',
-    component: SystemStatus,
-    meta: { requiresAuth: true }
-  },
-  {
-    path: '/network',
-    name: 'Network',
-    component: Network,
-    meta: { requiresAuth: true }
+    path: '/network-connections',
+    name: 'NetworkConnections',
+    component: NetworkConnections
   }
 ];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
-});
-
-router.beforeEach((to, from, next) => {
-  const loggedIn = !!localStorage.getItem('token');
-  if (to.matched.some(record => record.meta.requiresAuth) && !loggedIn) {
-    next({ name: 'Login' });
-  } else {
-    next();
-  }
 });
 
 export default router;

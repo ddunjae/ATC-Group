@@ -10,7 +10,7 @@
       </nav>
       <div class="nav-right">
         <div v-if="isLoggedIn">
-          {{ user }}
+          <u><strong>{{ user }}</strong></u>
           <button @click="handleLogout" class="logout-button">Logout</button>
         </div>
         <router-link v-else :to="{ name: 'Login' }" :class="{ active: $route.name === 'Login' }">Login</router-link>
@@ -48,13 +48,13 @@ export default {
 
 .app-header {
   width: 100%;
-  height: 60px; /* 헤더의 높이를 고정 */
+  height: 60px;
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #0078d4; /* Azure 색상 */
-  padding: 0; /* 헤더의 크기를 키우기 위해 패딩을 제거 */
-  z-index: 1000; /* 다른 요소들보다 위에 위치하도록 설정 */
+  background-color: #0078d4;
+  padding: 0;
+  z-index: 1000;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   border-bottom: 1px solid #0078d4;
 }
@@ -64,57 +64,54 @@ export default {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 100%; /* 부모 요소의 높이를 채우도록 설정 */
+  height: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px; /* 좌우 패딩을 설정하여 여백을 줌 */
 }
 
 .logo {
-  font-size: 24px; /* 로고 크기를 적당히 설정 */
+  margin-left: 20px; /* 왼쪽 끝에서 20px 떨어지게 설정 */
+  font-size: 24px;
   font-weight: bold;
 }
 
 .logo-link {
   color: white;
-  text-decoration: none; /* 밑줄 제거 */
+  text-decoration: none;
 }
 
 .nav-center {
   display: flex;
   gap: 30px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 100%; /* 부모의 높이를 100%로 설정 */
-  align-items: center; /* 세로로 중앙 정렬 */
+  height: 100%;
+  align-items: center;
 }
 
 .nav-right {
-  margin-left: auto;
-  height: 100%; /* 부모의 높이를 100%로 설정 */
   display: flex;
-  align-items: center; /* 세로로 중앙 정렬 */
+  align-items: center;
+  color: white;
+  margin-right: 20px; /* 오른쪽 끝에서 20px 떨어지게 설정 */
 }
 
 .nav-center a, .nav-right a {
   color: white;
   text-decoration: none;
-  font-size: 14px; /* 링크의 크기를 적당히 줄임 */
+  font-size: 14px;
   font-weight: bold;
-  padding: 0 15px; /* 좌우 패딩만 유지 */
-  height: 100%; /* 부모의 높이를 100%로 설정 */
+  padding: 0 15px;
+  height: 100%;
   display: flex;
-  align-items: center; /* 세로로 중앙 정렬 */
+  align-items: center;
   border-radius: 5px;
   transition: background-color 0.3s, color 0.3s;
 }
 
 .nav-link {
-  width: 140px; /* 두 링크의 너비를 동일하게 설정 */
+  width: 140px;
   display: flex;
-  justify-content: center; /* 텍스트를 수평으로 중앙에 정렬 */
-  align-items: center; /* 텍스트를 수직으로 중앙에 정렬 */
+  justify-content: center;
+  align-items: center;
 }
 
 .logout-button {
@@ -124,7 +121,7 @@ export default {
   cursor: pointer;
   font-size: 14px;
   font-weight: bold;
-  margin-left: 15px;
+  margin-left: 20px;
   transition: color 0.3s;
 }
 
@@ -139,5 +136,47 @@ export default {
 .nav-center a.active, .nav-right a.active {
   background-color: white;
   color: #0078d4;
+}
+
+/* 반응형 디자인을 위한 미디어 쿼리 */
+@media (max-width: 1200px) {
+  .logo {
+    margin-left: 50px; /* 화면이 작아지면 왼쪽 여백 감소 */
+  }
+  
+  .nav-right {
+    margin-right: 50px; /* 화면이 작아지면 오른쪽 여백 감소 */
+  }
+}
+
+@media (max-width: 768px) {
+  .logo {
+    margin-left: 20px; /* 화면이 더 작아지면 왼쪽 여백 더 감소 */
+  }
+
+  .nav-right {
+    margin-right: 20px; /* 화면이 더 작아지면 오른쪽 여백 더 감소 */
+  }
+
+  .nav-center {
+    display: none; /* 작은 화면에서는 중앙 내비게이션 숨김 */
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .logo {
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+
+  .nav-right {
+    margin-right: 0;
+  }
 }
 </style>

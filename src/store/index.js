@@ -3,7 +3,8 @@ import axios from 'axios';
 
 export default createStore({
   state: {
-    user: null
+    user: null,
+    sidebarOpen: false // 사이드바 상태 추가
   },
   mutations: {
     setUser(state, user) {
@@ -11,6 +12,12 @@ export default createStore({
     },
     clearUser(state) {
       state.user = null;
+    },
+    toggleSidebar(state) {
+      state.sidebarOpen = !state.sidebarOpen;
+    },
+    setSidebar(state, isOpen) {
+      state.sidebarOpen = isOpen;
     }
   },
   actions: {
@@ -34,10 +41,17 @@ export default createStore({
           commit('clearUser');
         }
       }
+    },
+    toggleSidebar({ commit }) {
+      commit('toggleSidebar');
+    },
+    setSidebar({ commit }, isOpen) {
+      commit('setSidebar', isOpen);
     }
   },
   getters: {
     isLoggedIn: state => !!state.user,
-    user: state => state.user
+    user: state => state.user,
+    isSidebarOpen: state => state.sidebarOpen // 사이드바 상태 게터 추가
   }
 });
